@@ -1,18 +1,20 @@
-<div id="product">
-  <h4><%= product.name %></h4>
-  
-  <%= image_tag "#{product.image}" %>
-  
-  <% if product.sale_price.nil? || product.sale_price == 0.0 %>
-    <p><%= product.price %></p>
-  <% else %>
-    <p class="cross_out" ><%= product.price %></p>
-    <p class="sale_price" ><%= product.sale_price %></p>
-  <% end %>
-  
-  <%= render :partial => 'productLinks', :locals => { :product => product } %>
-  
-  <% if show_description %>
-    <p><%= product.description %></p>
-  <% end %>  
-</div>
+<%= link_to (product_path(product.id)) do %>
+  <div class="product" >
+    <h4><%= product.name %></h4>
+    
+    <%= image_tag "#{product.image}" %>
+    
+    <% if product.sale_price.nil? || product.sale_price == 0.0 %>
+      <p><%= product.price %></p>
+    <% else %>
+      <p class="cross_out" ><%= product.price %></p>
+      <p class="sale_price" ><%= product.sale_price %></p>
+    <% end %>
+    
+    <%= render :partial => 'productLinks', :locals => { :product => product } %>
+    
+    <% if show_description %>
+      <p><%= product.description %></p>
+    <% end %>
+  </div>
+<% end %>

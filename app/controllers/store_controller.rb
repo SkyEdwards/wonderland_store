@@ -22,7 +22,7 @@ class StoreController < ApplicationController
   end
   
   def sale
-    
+    @sale_products = Product.where("sale_price IS NOT NULL").where("sale_price != 0.0")
   end
   
   def add_product
