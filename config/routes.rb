@@ -1,4 +1,7 @@
 WonderlandStore::Application.routes.draw do
+  
+  root :to => "store#index"
+  
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
@@ -11,7 +14,13 @@ WonderlandStore::Application.routes.draw do
   
   match "admin" => "store#admin", :via => :get, :as => "admin"
   
-  root :to => "store#index"
+  match "category" => "store#category", :via => :get, :as => "category"
+  
+  match "add_product/:id" => "store#add_product", :via => :get, :as => "add_product"
+        
+  match "remove_product/:id" => "store#remove_product", :via => :get, :as => "remove_product"
+  
+  match "clear_products" => "store#clear_products", :via => :get, :as => "clear_products"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

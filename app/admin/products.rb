@@ -1,3 +1,3 @@
-ActiveAdmin.register Products do
+ActiveAdmin.register Product do
   
 end

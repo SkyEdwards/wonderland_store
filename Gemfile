@@ -38,3 +38,5 @@ gem 'jquery-rails'
 # gem 'debugger'
 
 gem 'activeadmin'
+
+gem "country-select", "~> 1.1.1"

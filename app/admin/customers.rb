@@ -1,3 +1,3 @@
-ActiveAdmin.register Customers do
+ActiveAdmin.register Customer do
   
 end

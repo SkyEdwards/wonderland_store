@@ -1,3 +1,3 @@
-ActiveAdmin.register Orders do
+ActiveAdmin.register Order do
   
 end

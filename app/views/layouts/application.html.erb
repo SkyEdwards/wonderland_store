@@ -21,18 +21,50 @@
       <%= link_to 'Admin', admin_path %>
     </header>
     
-  <%= yield %>
-  
-  <footer>
-    <div id="bottomNav" >
-      <nav>
+  <hr />
+    
+    <aside>
+      <div id="shopping_cart">
+        <h5>Shopping Cart</h5>
+        <% if @my_products.empty? %>
+          <p>You have no items in your shopping cart</p>
+        <% else %>
+          <% @my_products.each do |my_product| %>
+            <p>
+              <%= my_product.name %>
+              <%= render :partial => 'productLinks', :locals => { :product => my_product} %>
+            </p>
+            <P><%= link_to 'Clear Cart', clear_products_path %></P>
+          <% end %>
+        <% end %>
+      </div>
+      
+      <div id="categories">
+        <h5>Categories</h5>
         <ul>
-          <li><%= link_to 'Home', index_path %></li>        
-          <li><%= link_to 'About', about_path %></li>
-          <li><%= link_to 'Contact', contact_path %></li>
+          <% @all_categories.each do |category| %>
+            <li><%= link_to "#{category.name}", category_path(category) %></li>
+          <% end %>
         </ul>
-      </nav>
-    </div>
-  </footer>
+      </div>
+    </aside>
+    
+    <section>
+      <%= yield %>
+    </section>      
+  
+  <hr />
+  
+    <footer>
+      <div id="bottomNav" >
+        <nav>
+          <ul>
+            <li><%= link_to 'Home', index_path %></li>        
+            <li><%= link_to 'About', about_path %></li>
+            <li><%= link_to 'Contact', contact_path %></li>
+          </ul>
+        </nav>
+      </div>
+    </footer>       
   </body>
 </html>
