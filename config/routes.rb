@@ -14,7 +14,7 @@ WonderlandStore::Application.routes.draw do
   
   match "admin" => "store#admin", :via => :get, :as => "admin"
   
-  match "category" => "store#category", :via => :get, :as => "category"
+  match "category/:id" => "store#category", :via => :get, :as => "category"
   
   match "add_product/:id" => "store#add_product", :via => :get, :as => "add_product"
         

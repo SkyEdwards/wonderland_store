@@ -6,7 +6,7 @@ class StoreController < ApplicationController
   end
   
   def category
-    @category_products = Product.category
+    @category_products = Category.find(params[:id]).products
   end
   
   def product
