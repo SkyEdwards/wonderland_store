@@ -37,6 +37,24 @@ class StoreController < ApplicationController
     @all_products = Product.order(:category_id)
   end
   
+  def check_out
+    
+  end
+  
+  def customer_info
+    @customer = Customer.new
+    @provinces = Province.order(:name)
+  end
+  
+  def search
+  end
+  
+  def search_results
+    keywords = params[:keywords]
+    
+    @product = Product.where("name LIKE ? OR description LIKE ?", "%#{keywords}%", "%#{keywords}%")
+  end
+  
   def add_product
       if session[:products].include?(params[:id])
         index = session[:products].index("#{params[:id]}")
@@ -46,8 +64,7 @@ class StoreController < ApplicationController
         session[:quantity] << 1
       end
     
-    #not sure if I want this to redirect to the home page all the time
-    redirect_to root_url
+    redirect_to :back
   end
   
   def remove_product
@@ -59,15 +76,13 @@ class StoreController < ApplicationController
     session[:products].delete(params[:id])
     end
     
-
-    #not sure if I want this to redirect to the home page all the time
-    redirect_to root_url
+    redirect_to :back
   end
   
   def clear_products
     session[:products] = nil
     session[:quantity] = nil
-    #not sure if I want this to redirect to the home page all the time
-    redirect_to root_url
+
+    redirect_to :back
   end
 end

@@ -6,6 +6,7 @@
 <hr />
 
   <div id="new">
+    <%= link_to 'See More ...', new_path %>
     <% @new_products.each do |product| %>
       <%= render :partial => "product", :object => product, :locals => { :show_description => false } %>
     <% end %>
@@ -14,6 +15,7 @@
 <hr />
 
   <div id="updated">
+    <%= link_to 'See More ...', updated_path %>
     <% @updated_products.each do |product| %>
       <%= render :partial => "product", :object => product, :locals => { :show_description => false } %>
     <% end %>

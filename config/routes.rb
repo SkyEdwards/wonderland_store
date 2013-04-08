@@ -24,6 +24,8 @@ WonderlandStore::Application.routes.draw do
   
   match "check_out" => "store#check_out", :via => :get, :as => "check_out"
   
+  match "customer_info" => "store#customer_info", :via => :get, :as => "customer_info"
+  
   match "product/:id" => "store#product", :via => :get, :as => "product"
   
   match "category/:id" => "store#category", :via => :get, :as => "category"
@@ -33,6 +35,10 @@ WonderlandStore::Application.routes.draw do
   match "remove_product/:id" => "store#remove_product", :via => :get, :as => "remove_product"
   
   match "clear_products" => "store#clear_products", :via => :get, :as => "clear_products"
+  
+  match "search" => "store#search", :as => 'search', :via => :get
+  
+  match "search_results" => "store#search_results", :via => :post, :as => 'search_results'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -19,6 +19,13 @@
           </ul>
         </nav>
       </div>
+      <div id="search">
+        <%= form_tag(search_results_path) do %>
+          <%= label_tag(:q, "Search:") %>
+          <%= text_field_tag(:keywords) %>
+          <%= submit_tag("Search") %>
+        <% end %>
+      </div>
       <%= link_to 'Admin', admin_path %>
     </header>
     
@@ -39,13 +46,13 @@
             </p>
           <% end %>
             <%= link_to 'Clear Cart', clear_products_path %>
-            <%= link_to 'Check Out', check_out_path %>
+            <%= link_to 'Proceed Check Out', customer_info_path %>
         <% end %>
       </div>
       
       <div id="categories">
         <h5>Categories</h5>
-        <%= link_to "All Ccategories", all_path %>
+        <%= link_to "All Categories", all_path %>
         <ul>
           <% @all_categories.each do |category| %>
             <li><%= link_to "#{category.name}", category_path(category.id) %></li>

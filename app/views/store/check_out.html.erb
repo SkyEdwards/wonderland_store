@@ -1,0 +1,6 @@
+<% @my_products.each do |my_product| %>
+  <%= my_product[:quantity] %> x
+  <%= my_product[:product].name %> ---
+  <%= my_product[:product].price %> . . . . . . . . . . . . . . . <%= my_product[:product].price * my_product[:quantity] %>
+<% end %>
+
