@@ -1,0 +1,3 @@
+<% @new_products.each do |product| %>
+  <%= render :partial => "product", :object => product, :locals => { :show_description => false } %>
+<% end %>

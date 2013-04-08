@@ -14,8 +14,8 @@
           <ul>
             <li><%= link_to 'Home', index_path %></li>
             <li><%= link_to 'Sale Items', sale_path %></li>
-            <li><%= link_to 'About', about_path %></li>
-            <li><%= link_to 'Contact', contact_path %></li>
+            <li><%= link_to 'New Items', new_path %></li>
+            <li><%= link_to 'Recently Updated Items', updated_path %></li>
           </ul>
         </nav>
       </div>
@@ -38,12 +38,14 @@
               <%= render :partial => 'productLinks', :locals => { :cart => true, :product => my_product[:product]} %>
             </p>
           <% end %>
-            <%= link_to 'Clear Cart', clear_products_path %>          
+            <%= link_to 'Clear Cart', clear_products_path %>
+            <%= link_to 'Check Out', check_out_path %>
         <% end %>
       </div>
       
       <div id="categories">
         <h5>Categories</h5>
+        <%= link_to "All Ccategories", all_path %>
         <ul>
           <% @all_categories.each do |category| %>
             <li><%= link_to "#{category.name}", category_path(category.id) %></li>

@@ -16,6 +16,14 @@ WonderlandStore::Application.routes.draw do
   
   match "sale" => "store#sale", :via => :get, :as => "sale"
   
+  match "new" => "store#new", :via => :get, :as => "new"
+  
+  match "all" => "store#all", :via => :get, :as => "all"
+  
+  match "updated" => "store#updated", :via => :get, :as => "updated"
+  
+  match "check_out" => "store#check_out", :via => :get, :as => "check_out"
+  
   match "product/:id" => "store#product", :via => :get, :as => "product"
   
   match "category/:id" => "store#category", :via => :get, :as => "category"

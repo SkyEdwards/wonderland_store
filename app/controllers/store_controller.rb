@@ -25,6 +25,18 @@ class StoreController < ApplicationController
     @sale_products = Product.where("sale_price IS NOT NULL").where("sale_price != 0.0")
   end
   
+  def new
+    @new_products = Product.order(:created_at)
+  end
+  
+  def updated
+    @updated_products = Product.order(:updated_at)
+  end
+  
+  def all
+    @all_products = Product.order(:category_id)
+  end
+  
   def add_product
       if session[:products].include?(params[:id])
         index = session[:products].index("#{params[:id]}")
