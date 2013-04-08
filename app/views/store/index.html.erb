@@ -1,6 +1,8 @@
   <div id="featured">
-    <%= image_tag "#{@featured[0].image}" %>
-    <h3 id="name"><%= @featured[0].name %></h3>
+    <%= link_to (product_path(@featured[0].id)) do %>
+      <%= image_tag "#{@featured[0].image}" %>
+      <h3 id="name"><%= @featured[0].name %></h3>
+    <% end %>
   </div>
 
 <hr />

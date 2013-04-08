@@ -25,6 +25,7 @@
           <%= text_field_tag(:keywords) %>
           <%= submit_tag("Search") %>
         <% end %>
+        <%= flash[:custom] %>
       </div>
       <%= link_to 'Admin', admin_path %>
     </header>
@@ -46,7 +47,7 @@
             </p>
           <% end %>
             <%= link_to 'Clear Cart', clear_products_path %>
-            <%= link_to 'Proceed Check Out', customer_info_path %>
+            <%= link_to 'Proceed to Check Out', customer_info_path %>
         <% end %>
       </div>
       

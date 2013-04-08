@@ -1,7 +1,3 @@
-<% if @product.empty? %>
-  <p>No results found for <%= params[:keywords] %></p>  
-<% else %>
-  <% @product.each do |product| %>
-    <%= render :partial => "product", :object => product, :locals => { :show_description => false } %>
-  <% end %>
+<% @product.each do |product| %>
+  <%= render :partial => "product", :object => product, :locals => { :show_description => false } %>
 <% end %>

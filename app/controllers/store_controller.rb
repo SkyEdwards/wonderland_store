@@ -46,13 +46,17 @@ class StoreController < ApplicationController
     @provinces = Province.order(:name)
   end
   
-  def search
-  end
   
   def search_results
     keywords = params[:keywords]
     
     @product = Product.where("name LIKE ? OR description LIKE ?", "%#{keywords}%", "%#{keywords}%")
+    
+    if @product.empty? 
+      flash[:custom] = "No results found for #{params[:keywords]}" 
+      redirect_to root_url
+    end
+
   end
   
   def add_product

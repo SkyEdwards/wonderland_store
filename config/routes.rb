@@ -26,6 +26,8 @@ WonderlandStore::Application.routes.draw do
   
   match "customer_info" => "store#customer_info", :via => :get, :as => "customer_info"
   
+  match "customers" => "store#customers", :via => :post, :as => "customers"
+  
   match "product/:id" => "store#product", :via => :get, :as => "product"
   
   match "category/:id" => "store#category", :via => :get, :as => "category"
@@ -35,8 +37,6 @@ WonderlandStore::Application.routes.draw do
   match "remove_product/:id" => "store#remove_product", :via => :get, :as => "remove_product"
   
   match "clear_products" => "store#clear_products", :via => :get, :as => "clear_products"
-  
-  match "search" => "store#search", :as => 'search', :via => :get
   
   match "search_results" => "store#search_results", :via => :post, :as => 'search_results'
 
