@@ -10,7 +10,13 @@ class ApplicationController < ActionController::Base
   
   def initialize_session
     session[:products] ||= []
+    session[:quantity] ||= []
     @my_products = []
-    session[:products].each { |id| @my_products << Product.find(id)}
+
+    session[:products].each do |id|
+        index = session[:products].index("#{id}")
+        @my_products << {:product => Product.find(id), :quantity => session[:quantity][index]}
+    end
+    
   end
 end

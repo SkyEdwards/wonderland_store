@@ -32,11 +32,13 @@
         <% else %>
           <% @my_products.each do |my_product| %>
             <p>
-              <%= my_product.name %>
-              <%= render :partial => 'productLinks', :locals => { :product => my_product} %>
+              <%= my_product[:quantity] %> x
+              <%= my_product[:product].name %> ---
+              <%= my_product[:product].price %>
+              <%= render :partial => 'productLinks', :locals => { :cart => true, :product => my_product[:product]} %>
             </p>
-            <P><%= link_to 'Clear Cart', clear_products_path %></P>
           <% end %>
+            <%= link_to 'Clear Cart', clear_products_path %>          
         <% end %>
       </div>
       

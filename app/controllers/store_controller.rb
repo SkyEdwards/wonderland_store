@@ -26,19 +26,35 @@ class StoreController < ApplicationController
   end
   
   def add_product
-    session[:products] << params[:id]
+      if session[:products].include?(params[:id])
+        index = session[:products].index("#{params[:id]}")
+        session[:quantity][index] += 1
+      else
+        session[:products] << params[:id]
+        session[:quantity] << 1
+      end
+    
     #not sure if I want this to redirect to the home page all the time
     redirect_to root_url
   end
   
   def remove_product
+    index = session[:products].index("#{params[:id]}")
+    if session[:quantity][index] > 1
+      session[:quantity][index] -= 1
+    else
+    session[:quantity].delete(index)
     session[:products].delete(params[:id])
+    end
+    
+
     #not sure if I want this to redirect to the home page all the time
     redirect_to root_url
   end
   
   def clear_products
     session[:products] = nil
+    session[:quantity] = nil
     #not sure if I want this to redirect to the home page all the time
     redirect_to root_url
   end
