@@ -11,6 +11,8 @@ class ApplicationController < ActionController::Base
   def initialize_session
     session[:products] ||= []
     session[:quantity] ||= []
+    session[:customer] ||= []
+    
     @my_products = []
 
     session[:products].each do |id|

@@ -38,7 +38,7 @@ class StoreController < ApplicationController
   end
   
   def check_out
-    
+    @customer = session[:customer][0]
   end
   
   def customer_info
@@ -46,6 +46,18 @@ class StoreController < ApplicationController
     @provinces = Province.order(:name)
   end
   
+  def customers
+    @customer = Customer.new(params[:customer])
+    @customer.save
+
+    if session[:customer][0].nil?
+      session[:customer][0] << @customer
+    else
+      session[:customer][0] = @customer
+    end
+
+    redirect_to check_out_path
+  end
   
   def search_results
     keywords = params[:keywords]

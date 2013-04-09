@@ -1,6 +1,23 @@
-<% @my_products.each do |my_product| %>
-  <%= my_product[:quantity] %> x
-  <%= my_product[:product].name %> ---
-  <%= my_product[:product].price %> . . . . . . . . . . . . . . . <%= my_product[:product].price * my_product[:quantity] %>
-<% end %>
+<div id="invoice">
+  <% if @my_products.empty? %>
+    <p>You have no items in your shopping cart</p>
+  <% else %>
+    <% @my_products.each do |my_product| %>
+     <%= my_product[:quantity] %> x
+     <%= my_product[:product].name %> ---
+     <%= my_product[:product].price %> . . . . . . . . . . . . . . . <%= my_product[:product].price * my_product[:quantity] %>
+     <%= render :partial => 'productLinks', :locals => { :cart => true, :product => my_product[:product]} %>
+    <% end %>
+  <% end %>
+  
+  <hr />
+  
+  <%= @customer.name %>
+  
+  <% if not @my_products.empty? %>
+    <p>You have no items in your shopping cart</p>
+  <% end %>
+</div>
+
+
 
