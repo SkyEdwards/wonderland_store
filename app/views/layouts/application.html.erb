@@ -21,7 +21,7 @@
       </div>
       <div id="search">
         <%= form_tag(search_results_path) do %>
-          <%= label_tag(:q, "Search:") %>
+          <%= label_tag(:keywords, "Search:") %>
           <%= text_field_tag(:keywords) %>
           <%= submit_tag("Search") %>
         <% end %>

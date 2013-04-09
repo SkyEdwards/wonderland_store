@@ -39,6 +39,8 @@ class StoreController < ApplicationController
   
   def check_out
     @customer = Customer.find(session[:customer][0])
+    @total = session[:total][0]
+    @grand_total = 0.0
   end
   
   def customer_info

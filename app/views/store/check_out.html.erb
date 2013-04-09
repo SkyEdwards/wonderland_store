@@ -5,14 +5,31 @@
     <% @my_products.each do |my_product| %>
       <%= my_product[:quantity] %> x
       <%= my_product[:product].name %> ---
-      $<%= my_product[:product].price %> . . . . . . . . . . . . . . . $<%= my_product[:product].price * my_product[:quantity] %>
+      $<%= my_product[:product].price %> . . . . . . . . . . . . . . . <%= number_to_currency(my_product[:product].price * my_product[:quantity]) %>
         <%= render :partial => 'productLinks', :locals => { :cart => false, :product => my_product[:product]} %>
         <%= render :partial => 'productLinks', :locals => { :cart => true, :product => my_product[:product]} %>
       <br />
     <% end %>
     <div id="totals">
-      <p>Sub-Total: <%= session[:total][0] %></p>      
+      <p>Sub-Total: <%= number_to_currency(@total) %>
+      <% @grand_total += (@total) %>
+      <% if @customer.province.gst != 0.0 && @customer.province.gst != nil %>
+        <br />GST: . . . . . . .<%= number_to_currency(@total * @customer.province.gst) %>
+        <% @grand_total += (@total * @customer.province.gst) %>
+      <% end %>
       
+      <% if @customer.province.pst != 0.0 && @customer.province.pst != nil %>
+        <br />PST: . . . . . . .<%= number_to_currency(@total * @customer.province.pst) %>
+        <% @grand_total += (@total * @customer.province.pst) %>
+      <% end %>
+      
+      <% if @customer.province.hst != 0.0 && @customer.province.hst != nil %>
+        <br />HST: . . . . . . .<%= number_to_currency(@total * @customer.province.hst) %>
+        <% @grand_total += (@total * @customer.province.hst) %>
+      <% end %>
+      
+      <br />Grand Total: <%= number_to_currency(@grand_total) %>
+      </p>
     </div>
 
   <% end %>
