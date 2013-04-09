@@ -38,7 +38,7 @@ class StoreController < ApplicationController
   end
   
   def check_out
-    @customer = session[:customer][0]
+    @customer = Customer.find(session[:customer][0])
   end
   
   def customer_info
@@ -46,14 +46,46 @@ class StoreController < ApplicationController
     @provinces = Province.order(:name)
   end
   
+  def add_order
+    customer = Customer.find(session[:customer][0])
+    product = customer.province
+    order = Order.new( :customer_id => customer.id,
+                        :gst_rate => product.gst,
+                        :pst_rate => product.pst, 
+                        :hst_rate => product.hst
+                      )
+    
+    if (order.save)
+      
+      @my_products.each do |my_product|
+        price = my_product[:product].price - my_product[:product].sale_price
+        order_product = OrderProduct.new(:order_id => order.id,
+                                          :product_id => my_product[:product].id,
+                                          :price => price,
+                                          :quantity => my_product[:quantity]
+                                          )
+        order_product.save
+      end
+      
+      flash[:custom] = "Order completed successfully." 
+    else
+      flash[:custom] = "Order Could Not Be processed."
+    end
+    
+    session[:products] = nil
+    session[:quantity] = nil
+    
+    redirect_to root_url
+  end
+  
   def customers
     @customer = Customer.new(params[:customer])
     @customer.save
 
     if session[:customer][0].nil?
-      session[:customer][0] << @customer
+      session[:customer][0] << @customer.id
     else
-      session[:customer][0] = @customer
+      session[:customer][0] = @customer.id
     end
 
     redirect_to check_out_path
@@ -79,8 +111,16 @@ class StoreController < ApplicationController
         session[:products] << params[:id]
         session[:quantity] << 1
       end
-    
-    redirect_to :back
+      
+      if Product.find(params[:id]).sale_price == 0.0
+        price = Product.find(params[:id]).price        
+      else
+        price = Product.find(params[:id]).sale_price
+      end
+         
+      session[:total][0] += price
+      
+      redirect_to :back      
   end
   
   def remove_product
@@ -92,12 +132,21 @@ class StoreController < ApplicationController
     session[:products].delete(params[:id])
     end
     
+    if Product.find(params[:id]).sale_price == 0.0
+      price = Product.find(params[:id]).price        
+    else
+      price = Product.find(params[:id]).sale_price
+    end
+    
+    session[:total][0] -= price
+    
     redirect_to :back
   end
   
   def clear_products
     session[:products] = nil
     session[:quantity] = nil
+    session[:total][0] = 0.0
 
     redirect_to :back
   end

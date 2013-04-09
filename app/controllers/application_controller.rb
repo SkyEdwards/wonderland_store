@@ -12,6 +12,7 @@ class ApplicationController < ActionController::Base
     session[:products] ||= []
     session[:quantity] ||= []
     session[:customer] ||= []
+    session[:total] ||= []
     
     @my_products = []
 

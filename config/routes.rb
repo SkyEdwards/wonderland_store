@@ -26,6 +26,8 @@ WonderlandStore::Application.routes.draw do
   
   match "customer_info" => "store#customer_info", :via => :get, :as => "customer_info"
   
+  match "add_order" => "store#add_order", :via => :get, :as => "add_order"
+  
   match "customers" => "store#customers", :via => :post, :as => "customers"
   
   match "product/:id" => "store#product", :via => :get, :as => "product"

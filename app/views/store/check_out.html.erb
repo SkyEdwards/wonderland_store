@@ -3,19 +3,36 @@
     <p>You have no items in your shopping cart</p>
   <% else %>
     <% @my_products.each do |my_product| %>
-     <%= my_product[:quantity] %> x
-     <%= my_product[:product].name %> ---
-     <%= my_product[:product].price %> . . . . . . . . . . . . . . . <%= my_product[:product].price * my_product[:quantity] %>
-     <%= render :partial => 'productLinks', :locals => { :cart => true, :product => my_product[:product]} %>
+      <%= my_product[:quantity] %> x
+      <%= my_product[:product].name %> ---
+      $<%= my_product[:product].price %> . . . . . . . . . . . . . . . $<%= my_product[:product].price * my_product[:quantity] %>
+        <%= render :partial => 'productLinks', :locals => { :cart => false, :product => my_product[:product]} %>
+        <%= render :partial => 'productLinks', :locals => { :cart => true, :product => my_product[:product]} %>
+      <br />
     <% end %>
+    <div id="totals">
+      <p>Sub-Total: <%= session[:total][0] %></p>      
+      
+    </div>
+
   <% end %>
   
   <hr />
   
-  <%= @customer.name %>
+  <p>
+    <%= @customer.name %>
+      <br />
+    <%= @customer.email %>
+      <br />
+    <%= @customer.street_address %>, <%= @customer.city %>
+      <br />
+    <%= @customer.postal_code %>
+      <br />
+    <%= @customer.province.name %> <%= @customer.country %>
+  </p>
   
   <% if not @my_products.empty? %>
-    <p>You have no items in your shopping cart</p>
+    <%= link_to 'Confirm Order', add_order_path %>
   <% end %>
 </div>
 

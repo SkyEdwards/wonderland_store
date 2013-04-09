@@ -4,7 +4,7 @@ class Order < ActiveRecord::Base
   belongs_to :customer
   has_many :products, :through => :order_products
   
-  validates_presence_of :customer_id, :status
+  validates_presence_of :customer_id
   
   def name
     self.customer.name + " -- #{self.created_at.strftime("%m/%d/%Y %H:%M:%S%Z")}"
